@@ -1,25 +1,23 @@
-/*process.stdout.write('\x07');
-let args = process.argv.slice(2);
-for (arg of args) {
-  setTimeout(() => {
-    process.stdout.write('\x07');
-  }, arg);
-}
+const readline = require("readline");
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+rl.question("Import: ", (key) => {
+  console.log(`The key value is: ${key}`);
+  //   process.stdout.write('\x07');
+  if (key === '\u0003') {
+    process.exit();
+  } else if (key >= 1 && key <= 9) {
+    for (let c of [...Array(5).keys()]) {
+      setTimeout(() => {
+        process.stdout.write('\x07');
 
-setTimeout(8, 4);*/
-
-/*process.stdin.setRawMode(true); 
-process.stdin.on('readable', () => {
-    let key = String(process.stdin.read());
-    if (key === '\u0066') {
-      process.stdout.on
+      }, c * 1000);
     }
-})*/
+  }
+//   process.stdin.on('data', (key) => {
+//     process.stdout.write('\x07');
+//   });
+});
 
-const log = document.getElementById('log');
-
-document.addEventListener('keypress', logKey);
-
-function logKey(e) {
-  log.textContent += ` ${e.code}`;
-}
